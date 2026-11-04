@@ -13,7 +13,7 @@ The terminal prints **one local URL**. Open that link in your normal external br
 
 ## Functional brief
 
-Users can browse bookings across an example directory of 18 rooms, create a booking, and change their own booking. Date ranges must be valid and overlapping bookings for the same room are rejected.
+Users can browse bookings across an example directory of 18 rooms, filter by building and sub-building (for example, Building A and A1), and clear filters in one action. Their own bookings are listed on a separate page and highlighted in teal on the availability calendar; other reservations use a grey diagonal pattern and available dates use green. Users can create or edit their own booking on the separate reservation page. Date ranges must be valid and overlapping bookings for the same room are rejected.
 
 ### Fields from the prior lab
 
