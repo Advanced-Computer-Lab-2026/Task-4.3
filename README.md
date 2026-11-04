@@ -22,7 +22,9 @@ Users can browse bookings across an example directory of 18 rooms, create a book
 - `endDate` — End date: YYYY-MM-DD, strictly after start
 - `purpose` — Purpose: optional
 
-The demo supports create/edit and stores your updates in browser `localStorage` for this browser. **Reset demo** restores the example records. You can assume the current signed-in user is `You`.
+The demo supports create/edit and stores your updates in browser `localStorage` for this browser. **My bookings** opens the dashboard at `#/dashboard`, where you can view your reservations and select **Change** to edit one. The **Rest** button appears in the reservation panel when creating or changing a booking and restores the example records. You can assume the current signed-in user is `You`.
+
+Click a calendar day to see room availability or reservation details, including the owner, full date range and purpose. Existing demo records identify owners as **You** or **Another student**; other students' names are not stored. Open days offer **Book this room**, and your own reservations offer **Change reservation**. Click **YOU** in the top-right corner to open your profile with your reservation count and dates.
 
 ## User scenario for this session
 
