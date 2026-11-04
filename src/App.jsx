@@ -58,33 +58,200 @@ function issue(form,bookings,id){
  return '';
 }
 export default function App(){
- const [bookings,setBookings]=useState(read);
- const [week,setWeek]=useState('2026-11-09');
- const [view,setView]=useState('All rooms');
- const [form,setForm]=useState({...formEmpty});
- const [editing,setEditing]=useState(null);
- const [error,setError]=useState('');
- const [notice,setNotice]=useState('');
- const [tab,setTab]=useState('Availability');
- useEffect(()=>localStorage.setItem(STORAGE,JSON.stringify(bookings)),[bookings]);
- const days=useMemo(()=>Array.from({length:7},(_,i)=>addDays(week,i)),[week]);
- const myBookings=bookings.filter(b=>b.owner==='you').sort((a,b)=>a.startDate.localeCompare(b.startDate));
- const roomList=view==='All rooms'?rooms:rooms.filter(r=>r===view);
- const occupied=(room,date)=>bookings.find(b=>b.roomNumber===room&&date>=b.startDate&&date<b.endDate);
- function pick(room,date){setForm({roomNumber:room,startDate:date,endDate:addDays(date,1),purpose:''});setEditing(null);setError('');document.getElementById('booking-form')?.scrollIntoView({behavior:'smooth',block:'nearest'});}
- function edit(row){if(row.owner!=='you')return;setEditing(row.id);setForm({roomNumber:row.roomNumber,startDate:row.startDate,endDate:row.endDate,purpose:row.purpose});setError('');setNotice('');}
- function submit(e){e.preventDefault();setNotice('');const err=issue(form,bookings,editing);if(err){setError('Reservation failed. Review the selected dates.');return;}const payload={roomNumber:form.roomNumber.trim(),startDate:form.startDate,endDate:form.endDate,purpose:form.purpose.trim(),owner:'you'};
- if(editing){setBookings(bookings.map(b=>b.id===editing?{...b,...payload}:b));setNotice('Booking updated.');}else{setBookings([...bookings,{...payload,id:'b-'+Date.now()}]);setNotice('Room reserved.');}setForm({...formEmpty});setEditing(null);setError('');}
- function reset(){setBookings(seed);setForm({...formEmpty});setEditing(null);setWeek('2026-11-09');setNotice('Example bookings restored.');setError('');setView('All rooms');}
- function check(){setNotice('');setError('');let e=issue(form,bookings,editing);if(e){setError(e);}else setNotice('No conflict detected for the selected dates.');}
- return <div className="room-app"><header className="topbar"><div className="mark"><span className="mark-sq">R</span><span><strong>room<span>grid</span></strong><small>Campus spaces</small></span></div><nav><button className={tab==='Availability'?'selected':''} onClick={()=>setTab('Availability')}>Availability</button><button className={tab==='My bookings'?'selected':''} onClick={()=>{setTab('My bookings');document.getElementById('my-reservations')?.scrollIntoView({behavior:'smooth'});}}>My bookings</button><button onClick={reset}>Reset demo</button></nav><div className="member"><span>Student dashboard</span><div className="profile">YOU</div></div></header>
-  <main><section className="intro"><div><span className="eyebrow">SPACES / RESERVATIONS</span><h1>Find room availability</h1><p>Review campus rooms, dates and existing reservations in one view.</p></div><div className="intro-summary"><span>ROOMS IN DIRECTORY</span><strong>{rooms.length.toString().padStart(2,'0')}</strong><span>CURRENT RESERVATIONS</span><strong>{bookings.length.toString().padStart(2,'0')}</strong></div></section>
-   <div className="pagegrid"><section className="calendar-pane"><div className="calendar-head"><div><span className="eyebrow">AVAILABILITY CALENDAR</span><h2>Rooms by day</h2></div><div className="weeknav"><button aria-label="Previous week" onClick={()=>setWeek(addDays(week,-7))}>←</button><strong>{human(week)} – {human(addDays(week,6))}</strong><button aria-label="Next week" onClick={()=>setWeek(addDays(week,7))}>→</button></div></div>
-    <div className="calendar-controls"><label>Location <select value={view} onChange={e=>setView(e.target.value)}><option>All rooms</option>{rooms.map(r=><option key={r}>{r}</option>)}</select></label><span className="legend"><i className="booked"/> Reserved</span><span className="legend"><i className="free"/> Available</span><p>Click a day to enter it in the form.</p></div>
-    <div className="calendar-scroll"><div className="room-cal"><div className="corner">ROOM / DATE</div>{days.map(d=><div className="dayhead" key={d}><strong>{weekDay(d)}</strong><span>{human(d)}</span></div>)}{roomList.map((room,i)=><React.Fragment key={room}><div className="roomname"><strong>{room}</strong><small>Study room · {room[0]}</small></div>{days.map(day=>{const b=occupied(room,day);return <button key={room+day} title={`${room}, ${day}: ${b?'Reserved':'Available'}`} className={'slot '+(b?'taken':'available')} onClick={()=>pick(room,day)}><span>{b?'Booked':'Open'}</span>{b&&<small>{b.owner==='you'?'Your booking':'Reserved'}</small>}</button>})}</React.Fragment>)}</div></div>
-    <p className="calendar-note">Cells show individual dates. Reservations may span several dates; a day marked "Open" does not guarantee the full range you choose will be available.</p>
-    <section id="my-reservations" className="reservations"><div className="reservations-head"><h2>Your bookings</h2><span>{myBookings.length} current records</span></div><div className="reservations-list">{myBookings.map(b=><article key={b.id} className="reservation"><div className="room-chip">{b.roomNumber}</div><div className="reservation-body"><strong>{human(b.startDate)} – {human(b.endDate)}</strong><small>{b.purpose||'No purpose entered'}</small></div><button onClick={()=>edit(b)}>Change</button></article>)}{myBookings.length===0&&<p>No reservations.</p>}</div></section></section>
-    <aside className="booking-pane" id="booking-form"><div className="panel-tag"><span>BOOK A ROOM</span><span>FORM 01</span></div><h2>{editing?'Change reservation':'Make a reservation'}</h2><p className="booking-description">Use this panel to request a room for your study group, meeting or activity.</p>{notice&&<div className="success" role="status">{notice}</div>}{error&&<div className="error" role="alert">{error}</div>}<form onSubmit={submit}><label><span>Room number</span><input list="rooms" placeholder="e.g., B2-104" value={form.roomNumber} onChange={e=>setForm(f=>({...f,roomNumber:e.target.value}))}/><datalist id="rooms">{rooms.map(r=><option key={r} value={r}/>)}</datalist></label><div className="date-pair"><label><span>Start date</span><input type="date" value={form.startDate} onChange={e=>setForm(f=>({...f,startDate:e.target.value}))}/></label><label><span>End date</span><input type="date" value={form.endDate} onChange={e=>setForm(f=>({...f,endDate:e.target.value}))}/></label></div><label><span>Purpose / optional</span><textarea rows="5" placeholder="Meeting, group study..." value={form.purpose} onChange={e=>setForm(f=>({...f,purpose:e.target.value}))}/></label><p className="helper">Start and end dates are required. Reservations cannot overlap existing bookings for the same room.</p><button className="availability-check" type="button" onClick={check}>Check availability</button><button className="reserve-button" type="submit">{editing?'Save booking':'Confirm booking'}</button>{editing&&<button className="cancel-edit" type="button" onClick={()=>{setEditing(null);setForm({...formEmpty});setError('')}}>Cancel editing</button>}</form><div className="right-foot"><span>✦</span> Need a room for a group? Find an open date and submit your request.</div></aside></div>
-  </main><footer>ROOMGRID / Academic campus demo — local browser data only.</footer>
- </div>;
+	 const [bookings,setBookings]=useState(read);
+	 const [week,setWeek]=useState('2026-11-09');
+	 const [view,setView]=useState('All buildings');
+	 const [form,setForm]=useState({...formEmpty});
+	 const [editing,setEditing]=useState(null);
+	 const [error,setError]=useState('');
+	 const [notice,setNotice]=useState('');
+	 const [tab,setTab]=useState('Availability');
+	 const [isModalOpen, setIsModalOpen]=useState(false);
+	 const [toast, setToast] = useState(null);
+	 useEffect(()=>localStorage.setItem(STORAGE,JSON.stringify(bookings)),[bookings]);
+	 const days=useMemo(()=>Array.from({length:7},(_,i)=>addDays(week,i)),[week]);
+	 const myBookings=bookings.filter(b=>b.owner==='you').sort((a,b)=>a.startDate.localeCompare(b.startDate));
+	 const buildings=['A','B','C','D'];
+	 const groupedRooms=useMemo(()=>buildings.reduce((acc,b)=>({ ...acc,[b]:rooms.filter(r=>r[0]===b)}),{}),[rooms]);
+	 const filteredBuildings=view==='All buildings'?buildings:buildings.includes(view)?[view]:[];
+	 const occupied=(room,date)=>bookings.find(b=>b.roomNumber===room&&date>=b.startDate&&date<b.endDate);
+
+	 const getStatusBlocks = (room) => {
+	  const blocks = [];
+	  if (days.length === 0) return blocks;
+
+	  let currentStatus = occupied(room, days[0]) ? 'taken' : 'available';
+	  let startIdx = 0;
+	  let currentOwner = occupied(room, days[0])?.owner;
+
+	  for (let i = 1; i < days.length; i++) {
+	   const b = occupied(room, days[i]);
+	   const status = b ? 'taken' : 'available';
+	   const owner = b?.owner;
+
+	   if (status !== currentStatus || (status === 'taken' && owner !== currentOwner)) {
+	    blocks.push({ status: currentStatus, startIdx, duration: i - startIdx, owner: currentOwner });
+	    currentStatus = status;
+	    startIdx = i;
+	    currentOwner = owner;
+	   }
+	  }
+	  blocks.push({ status: currentStatus, startIdx, duration: days.length - startIdx, owner: currentOwner });
+	  return blocks;
+	 };
+
+	 function pick(room,date){setForm({roomNumber:room,startDate:date,endDate:addDays(date,1),purpose:''});setEditing(null);setError('');setIsModalOpen(true);}
+	 function edit(row){if(row.owner!=='you')return;setEditing(row.id);setForm({roomNumber:row.roomNumber,startDate:row.startDate,endDate:row.endDate,purpose:row.purpose});setError('');setNotice('');setIsModalOpen(true);}
+	 function submit(e){e.preventDefault();setNotice('');const err=issue(form,bookings,editing);if(err){setError('Reservation failed. Review the selected dates.');return;}const payload={roomNumber:form.roomNumber.trim(),startDate:form.startDate,endDate:form.endDate,purpose:form.purpose.trim(),owner:'you'};
+	 if(editing){setBookings(bookings.map(b=>b.id===editing?{...b,...payload}:b));setNotice('Booking updated.');}else{setBookings([...bookings,{...payload,id:'b-'+Date.now()}]);setNotice('Room reserved.');}setForm({...formEmpty});setEditing(null);setError('');setIsModalOpen(false);}
+	 function reset(){setBookings(seed);setForm({...formEmpty});setEditing(null);setWeek('2026-11-09');setNotice('Example bookings restored.');setError('');setView('All buildings');}
+	 function check(){setNotice('');setError('');let e=issue(form,bookings,editing);if(e){setError(e);}else setNotice('No conflict detected for the selected dates.');}
+	 function showToast(msg){setToast(msg);setTimeout(()=>setToast(null),3000);}
+	 return (
+	 <div className="room-app">
+	  <header className="topbar">
+	   <div className="mark"><span className="mark-sq">R</span><span><strong>room<span>grid</span></strong><small>Campus spaces</small></span></div>
+	   <nav>
+	    <button className={tab==='Availability'?'selected':''} onClick={()=>setTab('Availability')}>Availability</button>
+	    <button className={tab==='My bookings'?'selected':''} onClick={()=>{setTab('My bookings');document.getElementById('my-reservations')?.scrollIntoView({behavior:'smooth'});}}>My bookings</button>
+	    <button onClick={reset}>Reset demo</button>
+	   </nav>
+	   <div className="member"><span>Student dashboard</span><div className="profile">YOU</div></div>
+	  </header>
+	  <main>
+	   <section className="intro">
+	    <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'1rem'}}>
+	     <div><span className="eyebrow">SPACES / RESERVATIONS</span><h1>Find room availability</h1><p>Review campus rooms, dates and existing reservations in one view.</p></div>
+	     <button onClick={()=> {setForm({...formEmpty}); setEditing(null); setIsModalOpen(true);}} style={{padding:'12px 24px', backgroundColor:'#007a7a', color:'white', border:'none', borderRadius:'8px', fontWeight:'bold', cursor:'pointer', boxShadow:'0 4px 6px rgba(0,0,0,0.1)'}}>Find a Room</button>
+	    </div>
+	    <div className="intro-summary"><span>ROOMS IN DIRECTORY</span><strong>{rooms.length.toString().padStart(2,'0')}</strong><span>CURRENT RESERVATIONS</span><strong>{bookings.length.toString().padStart(2,'0')}</strong></div>
+	   </section>
+	   <div className="pagegrid" style={{display: 'flex', justifyContent: 'center'}}>
+	    <section className="calendar-pane" style={{width: '100%', maxWidth: '1400px'}}>
+	     <div className="calendar-head">
+	      <div><span className="eyebrow">AVAILABILITY CALENDAR</span><h2>Rooms by day</h2></div>
+	      <div className="weeknav">
+	       <button aria-label="Previous week" onClick={()=>setWeek(addDays(week,-7))}>←</button>
+	       <strong>{human(week)} – {human(addDays(week,6))}</strong>
+	       <button aria-label="Next week" onClick={()=>setWeek(addDays(week,7))}>→</button>
+	      </div>
+	     </div>
+	     <div className="calendar-controls">
+	      <label>Building
+	       <select value={view} onChange={e=>setView(e.target.value)}>
+	        <option value="All buildings">All buildings</option>
+	        {buildings.map(b=><option key={b} value={b}>Building {b}</option>)}
+	       </select>
+	      </label>
+	      <span className="legend"><i className="booked"/> Reserved</span>
+	      <span className="legend"><i className="free"/> Available</span>
+	      <p>Click a day to enter it in the form.</p>
+	     </div>
+	     <div className="calendar-scroll">
+	      <div className="room-cal">
+	       <div className="corner">ROOM / DATE</div>
+	       {days.map(d=><div className="dayhead" key={d}><strong>{weekDay(d)}</strong><span>{human(d)}</span></div>)}
+	       {filteredBuildings.map(b=>(
+	        <React.Fragment key={b}>
+	         <div className="room-cal-header" style={{gridColumn: `1 / span ${days.length + 1}`, backgroundColor: '#f0f0f0', padding: '8px', fontWeight: 'bold', borderBottom: '2px solid #ccc', textAlign: 'center'}}>Building {b}</div>
+	         {groupedRooms[b].map(room=>(
+	          <React.Fragment key={room}>
+	           <div className="roomname"><strong>{room}</strong><small>Study room · {room[0]}</small></div>
+	           {getStatusBlocks(room).map((block, idx)=>(
+	            <div
+	             key={`${room}-${idx}`}
+	             onClick={(e)=>{
+	              if(block.status === 'taken') { showToast('Already Booked'); return; }
+	              const rect = e.currentTarget.getBoundingClientRect();
+	              const x = e.clientX - rect.left;
+	              const dayOffset = Math.floor((x / rect.width) * block.duration);
+	              const actualDay = days[block.startIdx + dayOffset];
+	              pick(room, actualDay);
+	             }}
+	             style={{
+	              gridColumn: `span ${block.duration}`,
+	              display: 'flex',
+	              flexDirection: 'column',
+	              alignItems: 'center',
+	              justifyContent: 'center',
+	              cursor: 'pointer',
+	              userSelect: 'none',
+	              borderRight: '1px solid rgba(0,0,0,0.05)',
+	              borderBottom: '1px solid rgba(0,0,0,0.05)',
+	              position: 'relative'
+	             }}
+	             className={'slot ' + (block.status === 'taken' ? 'taken' : 'available')}
+	            >
+	             <span style={{textAlign: 'center', zIndex: 1}}>{block.status === 'taken' ? 'Booked' : 'Open'}</span>
+	             {block.status === 'taken' && <small style={{fontSize: '0.6rem', opacity: 0.8, marginTop: '2px', zIndex: 1}}>{block.owner === 'you' ? 'Your booking' : 'Reserved'}</small>}
+	            </div>
+	           ))}
+	          </React.Fragment>
+	         ))}
+	        </React.Fragment>
+	       ))}
+	      </div>
+	     </div>
+	     <p className="calendar-note">Cells show individual dates. Reservations may span several dates; a day marked "Open" does not guarantee the full range you choose will be available.</p>
+	     <section id="my-reservations" className="reservations">
+	      <div className="reservations-head"><h2>Your bookings</h2><span>{myBookings.length} current records</span></div>
+	      <div className="reservations-list">
+	       {myBookings.map(b=>(
+	        <article key={b.id} className="reservation">
+	         <div className="room-chip">{b.roomNumber}</div>
+	         <div className="reservation-body"><strong>{human(b.startDate)} – {human(b.endDate)}</strong><small>{b.purpose||'No purpose entered'}</small></div>
+	         <button onClick={()=>edit(b)}>Change</button>
+	        </article>
+	       ))}
+	       {myBookings.length===0&&<p>No reservations.</p>}
+	      </div>
+	     </section>
+	    </section>
+	   </div>
+	  </main>
+	  <footer>ROOMGRID / Academic campus demo — local browser data only.</footer>
+	  {toast && (
+	   <div style={{position: 'fixed', top: '20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#333', color: 'white', padding: '12px 24px', borderRadius: '30px', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', zIndex: 2000, fontWeight: 'bold', animation: 'fadeIn 0.3s'}}>{toast}</div>
+	  )}
+	  {isModalOpen && (
+	   <div style={{position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, backdropFilter: 'blur(4px)'}}>
+	    <div style={{backgroundColor: 'white', padding: '2.5rem', borderRadius: '16px', width: 'auto', maxWidth: '500px', boxShadow: '0 20px 40px rgba(0,0,0,0.3)', position: 'relative', color: 'black', fontFamily: 'system-ui, -apple-system, sans-serif'}}>
+	     <button onClick={()=>setIsModalOpen(false)} style={{position: 'absolute', top: '1.2rem', right: '1.2rem', border: 'none', background: 'none', cursor: 'pointer', fontSize: '1.5rem', color: '#999', lineHeight: 1}}>✕</button>
+	     <div className="panel-tag" style={{marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', fontWeight: 'bold', color: '#007a7a', letterSpacing: '1px'}}><span>BOOK A ROOM</span><span>FORM 01</span></div>
+	     <h2 style={{marginTop: 0, fontSize: '1.8rem', marginBottom: '0.5rem', color: '#222'}}>{editing?'Change reservation':'Make a reservation'}</h2>
+	     <p className="booking-description" style={{marginBottom: '2rem', color: '#666', fontSize: '0.95rem', lineHeight: '1.5'}}>Use this panel to request a room for your study group, meeting or activity.</p>
+	     {notice&&<div className="success" role="status" style={{padding:'10px', borderRadius:'8px', marginBottom:'1rem', backgroundColor:'#d4edda', color:'#155724', border:'1px solid #c3e6cb'}}>{notice}</div>}
+	     {error&&<div className="error" role="alert" style={{padding:'10px', borderRadius:'8px', marginBottom:'1rem', backgroundColor:'#f8d7da', color:'#721c24', border:'1px solid #f5c6cb'}}>{error}</div>}
+	     <form onSubmit={submit} style={{display: 'flex', flexDirection: 'column', gap: '1.2rem'}}>
+	      <label style={{display:'flex', flexDirection:'column', gap:'6px'}}>
+	       <span style={{fontWeight: '600', fontSize: '0.9rem', color: '#444'}}>Room number</span>
+	       <input list="rooms" placeholder="e.g., B2-104" value={form.roomNumber} onChange={e=>setForm(f=>({...f,roomNumber:e.target.value}))} style={{padding:'10px', borderRadius:'8px', border:'1px solid #ccc', fontSize: '1rem'}}/>
+	       <datalist id="rooms">{rooms.map(r=><option key={r} value={r}/>)}</datalist>
+	      </label>
+	      <div className="date-pair" style={{display: 'flex', gap: '1rem'}}>
+	       <label style={{flex: 1, display:'flex', flexDirection:'column', gap:'6px'}}>
+	        <span style={{fontWeight: '600', fontSize: '0.9rem', color: '#444'}}>Start date</span>
+	        <input type="date" value={form.startDate} onChange={e=>setForm(f=>({...f,startDate:e.target.value}))} style={{padding:'10px', borderRadius:'8px', border:'1px solid #ccc', fontSize: '1rem'}}/>
+	       </label>
+	       <label style={{flex: 1, display:'flex', flexDirection:'column', gap:'6px'}}>
+	        <span style={{fontWeight: '600', fontSize: '0.9rem', color: '#444'}}>End date</span>
+	        <input type="date" value={form.endDate} onChange={e=>setForm(f=>({...f,endDate:e.target.value}))} style={{padding:'10px', borderRadius:'8px', border:'1px solid #ccc', fontSize: '1rem'}}/>
+	       </label>
+	      </div>
+	      <label style={{display:'flex', flexDirection:'column', gap:'6px'}}>
+	       <span style={{fontWeight: '600', fontSize: '0.9rem', color: '#444'}}>Purpose / optional</span>
+	       <textarea rows="4" placeholder="Meeting, group study..." value={form.purpose} onChange={e=>setForm(f=>({...f,purpose:e.target.value}))} style={{padding:'10px', borderRadius:'8px', border:'1px solid #ccc', fontSize: '1rem', resize: 'none'}}></textarea>
+	      </label>
+	      <p className="helper" style={{fontSize: '0.8rem', color: '#888', margin: '0 0 1rem 0'}}>Start and end dates are required. Reservations cannot overlap existing bookings for the same room.</p>
+	      <div style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
+	       <button className="availability-check" type="button" onClick={check} style={{padding:'12px', borderRadius:'8px', border:'1px solid #007a7a', backgroundColor:'white', color:'#007a7a', fontWeight:'bold', cursor:'pointer', transition:'all 0.2s'}}>Check availability</button>
+	       <button className="reserve-button" type="submit" style={{padding:'12px', borderRadius:'8px', border:'none', backgroundColor:'#007a7a', color:'white', fontWeight:'bold', cursor:'pointer', transition:'all 0.2s', fontSize: '1rem'}}> {editing?'Save booking':'Confirm booking'}</button>
+	       {editing&&<button className="cancel-edit" type="button" onClick={()=>{setEditing(null);setForm({...formEmpty});setError('');setIsModalOpen(false);}} style={{padding:'12px', borderRadius:'8px', border:'none', background:'none', color:'#666', cursor:'pointer', fontSize:'0.9rem'}}>Cancel editing</button>}
+	      </div>
+	     </form>
+	    </div>
+	   </div>
+	  )}
+	 </div>
+	);
 }
