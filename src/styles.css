@@ -21,3 +21,6 @@
 .slot:focus-visible,.reservation button:focus-visible,.booking-pane button:focus-visible{outline:2px solid #0f7b86;outline-offset:2px}
 .reservation.is-editing{border-color:#0f7b86;background:#eef8f8}
 .cancel-edit{display:block;width:100%;padding:11px;border:1px solid #e0e8eb;border-radius:7px;color:#527380;background:#fff;margin-top:9px}
+/* Other students' bookings are not selectable */
+.slot.locked{cursor:not-allowed}
+.slot.locked:hover{outline:none}
