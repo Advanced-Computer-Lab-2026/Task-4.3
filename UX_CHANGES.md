@@ -47,3 +47,5 @@ What I changed: I switched to just DM Sans and moved colours, font sizes, spacin
 For the date problem (#3), the AI's first idea was to replace the End date field with a "Last day" field and convert it to the check-out date behind the scenes. I didn't go with that. The brief defines `endDate` as a date strictly after the start, and changing what the field means could easily cause off-by-one mistakes in validation that already worked.
 
 What I did instead was keep the real field, make its label clearer, and show every booking as the days you actually have. In the calendar you still pick the last day you need, and the check-out date is filled in for you. Users get the simpler "last day" way of thinking, and the data and validation stay exactly the same.
+
+Also In edit booking, AI suggested that when you click edit; you get sent up to the change booking card; however I suggested the card 'moves' vertically with user as he scrolles down into page so that it always appear to use acting as way for them to always view the data of booking.
