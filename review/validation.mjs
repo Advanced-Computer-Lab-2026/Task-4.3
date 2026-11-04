@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const source=fs.readFileSync('src/App.jsx','utf8');
+const scope={}; vm.createContext(scope);
+vm.runInContext(source.slice(source.indexOf('function issue('),source.indexOf('export default')),scope);
+const booking={id:'1',roomNumber:'A1-203',startDate:'2026-11-09',endDate:'2026-11-11'};
+assert.match(scope.issue({roomNumber:'',startDate:'',endDate:''},[],null),/Complete/);
+assert.match(scope.issue({...booking,endDate:booking.startDate},[],null),/follow/);
+assert.match(scope.issue({...booking,roomNumber:'a1-203'},[booking],null),/already booked/);
+assert.equal(scope.issue({...booking,startDate:'2026-11-11',endDate:'2026-11-12'},[booking],null),'');
+assert.equal(scope.issue(booking,[booking],'1'),'');
+console.log('Passed: required fields, date ordering, case-insensitive overlap, adjacent ranges, self-edit.');
