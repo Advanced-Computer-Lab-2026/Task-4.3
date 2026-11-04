@@ -52,10 +52,15 @@ function addDays(iso,days){const t=new Date(`${iso}T12:00:00Z`);t.setUTCDate(t.g
 function human(iso){return new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB',{timeZone:'UTC',day:'numeric',month:'short'});}
 function weekDay(iso){return new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB',{timeZone:'UTC',weekday:'short'});}
 function issue(form, bookings, id) {
-  if (!form.roomNumber.trim() ||
-      !form.startDate ||
-      !form.endDate) {
-    return 'Complete the room and both dates.';
+  const missing = [];
+  if (!form.roomNumber.trim()) missing.push('a room');
+  if (!form.startDate) missing.push('a start date');
+  if (!form.endDate) missing.push('an end date');
+  if (missing.length) {
+    const fields = missing.length === 1
+      ? missing[0]
+      : `${missing.slice(0, -1).join(', ')} and ${missing[missing.length - 1]}`;
+    return `Please select ${fields}.`;
   }
 
   if (!rooms.some(
@@ -95,7 +100,7 @@ export default function App(){
  const roomList=view==='All rooms'?rooms:rooms.filter(r=>r===view);
  const occupied=(room,date)=>bookings.find(b=>b.roomNumber===room&&date>=b.startDate&&date<b.endDate);
  function pick(room,date){setForm({roomNumber:room,startDate:date,endDate:addDays(date,1),purpose:''});setEditing(null);setError('');document.getElementById('booking-form')?.scrollIntoView({behavior:'smooth',block:'nearest'});}
- function edit(row){if(row.owner!=='you')return;setEditing(row.id);setForm({roomNumber:row.roomNumber,startDate:row.startDate,endDate:row.endDate,purpose:row.purpose});setError('');setNotice('');}
+ function edit(row){if(row.owner!=='you')return;setEditing(row.id);setForm({roomNumber:row.roomNumber,startDate:row.startDate,endDate:row.endDate,purpose:row.purpose});setError('');setNotice('');document.getElementById('booking-form')?.scrollIntoView({behavior:'smooth',block:'start'});document.querySelector('#booking-form input')?.focus({preventScroll:true});}
  function submit(e){e.preventDefault();setNotice('');const err=issue(form,bookings,editing);if(err){setError(err);return;}const payload={roomNumber:form.roomNumber.trim(),startDate:form.startDate,endDate:form.endDate,purpose:form.purpose.trim(),owner:'you'};
  if(editing){setBookings(bookings.map(b=>b.id===editing?{...b,...payload}:b));setNotice('Booking updated.');}else{setBookings([...bookings,{...payload,id:'b-'+Date.now()}]);setNotice('Room reserved.');}setForm({...formEmpty});setEditing(null);setError('');}
  function reset(){setBookings(seed);setForm({...formEmpty});setEditing(null);setWeek('2026-11-09');setNotice('Example bookings restored.');setError('');setView('All rooms');}
