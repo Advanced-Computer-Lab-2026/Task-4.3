@@ -1,4 +1,4 @@
-import React,{useEffect,useMemo,useState} from 'react';
+import React,{useEffect,useMemo,useRef,useState} from 'react';
 
 const STORAGE='acl-roomgrid-18rooms-v1';
 const rooms=['A1-203', 'A2-106', 'A2-107', 'A3-208', 'A3-209', 'B1-205', 'B1-206', 'B1-207', 'B2-104', 'B2-105', 'B3-301', 'C1-102', 'C1-103', 'C2-201', 'C2-202', 'C3-101', 'C3-102', 'D1-101'];
@@ -51,11 +51,28 @@ function read(){try{let a=JSON.parse(localStorage.getItem(STORAGE));return Array
 function addDays(iso,days){const t=new Date(`${iso}T12:00:00Z`);t.setUTCDate(t.getUTCDate()+days);return t.toISOString().slice(0,10);}
 function human(iso){return new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB',{timeZone:'UTC',day:'numeric',month:'short'});}
 function weekDay(iso){return new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB',{timeZone:'UTC',weekday:'short'});}
+// endDate is exclusive: the last booked day is the day before it.
+function dayCount(start,end){return Math.round((new Date(`${end}T12:00:00Z`)-new Date(`${start}T12:00:00Z`))/86400000);}
+function dayLabel(n){return n===1?'1 day':`${n} days`;}
+function bookedDays(start,end){const last=addDays(end,-1);return start===last?human(start):`${human(start)} – ${human(last)}`;}
+const isoDate=/^\d{4}-\d{2}-\d{2}$/;
 function issue(form,bookings,id){
  if(!form.roomNumber.trim()||!form.startDate||!form.endDate)return 'Complete the room and both dates.';
  if(form.endDate<=form.startDate)return 'End date must follow start date.';
- if(bookings.some(b=>b.id!==id&&b.roomNumber.toLowerCase()===form.roomNumber.trim().toLowerCase()&&form.startDate<b.endDate&&form.endDate>b.startDate))return 'This room is already booked for some of those dates.';
+ const hits=bookings.filter(b=>b.id!==id&&b.roomNumber.toLowerCase()===form.roomNumber.trim().toLowerCase()&&form.startDate<b.endDate&&form.endDate>b.startDate);
+ if(hits.length)return overlapMessage(form,bookings,id,hits);
  return '';
+}
+// Names the clashing days (clipped to the requested range) and the first free day after them.
+function overlapMessage(form,bookings,id,hits){
+ const room=hits[0].roomNumber,key=room.toLowerCase();
+ const parts=hits.map(b=>[b.startDate>form.startDate?b.startDate:form.startDate,b.endDate<form.endDate?b.endDate:form.endDate]).sort((x,y)=>x[0].localeCompare(y[0]));
+ const merged=[];for(const p of parts){const last=merged[merged.length-1];if(last&&p[0]<=last[1]){if(p[1]>last[1])last[1]=p[1];}else merged.push([...p]);}
+ let free=hits.reduce((m,b)=>b.endDate>m?b.endDate:m,'');
+ let next;while((next=bookings.find(b=>b.id!==id&&b.roomNumber.toLowerCase()===key&&b.startDate<=free&&b.endDate>free)))free=next.endDate;
+ const ranges=merged.map(([s,e])=>bookedDays(s,e));
+ const list=ranges.length>1?ranges.slice(0,-1).join(', ')+' and '+ranges[ranges.length-1]:ranges[0];
+ return `${room} is already booked on ${list}. It's free again from ${human(free)}.`;
 }
 export default function App(){
  const [bookings,setBookings]=useState(read);
@@ -66,15 +83,21 @@ export default function App(){
  const [error,setError]=useState('');
  const [notice,setNotice]=useState('');
  const [tab,setTab]=useState('Availability');
+ const [flash,setFlash]=useState(false);
+ const roomInput=useRef(null);
  useEffect(()=>localStorage.setItem(STORAGE,JSON.stringify(bookings)),[bookings]);
  const days=useMemo(()=>Array.from({length:7},(_,i)=>addDays(week,i)),[week]);
  const myBookings=bookings.filter(b=>b.owner==='you').sort((a,b)=>a.startDate.localeCompare(b.startDate));
  const roomList=view==='All rooms'?rooms:rooms.filter(r=>r===view);
+ const editingRow=editing?bookings.find(b=>b.id===editing):null;
+ const datesValid=isoDate.test(form.startDate)&&isoDate.test(form.endDate)&&form.endDate>form.startDate;
  const occupied=(room,date)=>bookings.find(b=>b.roomNumber===room&&date>=b.startDate&&date<b.endDate);
- function pick(room,date){setForm({roomNumber:room,startDate:date,endDate:addDays(date,1),purpose:''});setEditing(null);setError('');document.getElementById('booking-form')?.scrollIntoView({behavior:'smooth',block:'nearest'});}
- function edit(row){if(row.owner!=='you')return;setEditing(row.id);setForm({roomNumber:row.roomNumber,startDate:row.startDate,endDate:row.endDate,purpose:row.purpose});setError('');setNotice('');}
- function submit(e){e.preventDefault();setNotice('');const err=issue(form,bookings,editing);if(err){setError('Reservation failed. Review the selected dates.');return;}const payload={roomNumber:form.roomNumber.trim(),startDate:form.startDate,endDate:form.endDate,purpose:form.purpose.trim(),owner:'you'};
- if(editing){setBookings(bookings.map(b=>b.id===editing?{...b,...payload}:b));setNotice('Booking updated.');}else{setBookings([...bookings,{...payload,id:'b-'+Date.now()}]);setNotice('Room reserved.');}setForm({...formEmpty});setEditing(null);setError('');}
+ function scrollToForm(block){const reduce=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;document.getElementById('booking-form')?.scrollIntoView({behavior:reduce?'auto':'smooth',block});}
+ function pick(room,date){setForm({roomNumber:room,startDate:date,endDate:addDays(date,1),purpose:''});setEditing(null);setError('');scrollToForm('nearest');}
+ function edit(row){if(row.owner!=='you')return;setEditing(row.id);setForm({roomNumber:row.roomNumber,startDate:row.startDate,endDate:row.endDate,purpose:row.purpose});setError('');setNotice('');scrollToForm('start');roomInput.current?.focus({preventScroll:true});setFlash(true);setTimeout(()=>setFlash(false),1500);}
+ function discard(){setEditing(null);setForm({...formEmpty});setError('');setNotice('Changes discarded. Your booking was not changed.');}
+ function submit(e){e.preventDefault();setNotice('');const err=issue(form,bookings,editing);if(err){setError(err);return;}const payload={roomNumber:form.roomNumber.trim(),startDate:form.startDate,endDate:form.endDate,purpose:form.purpose.trim(),owner:'you'};
+ if(editing){setBookings(bookings.map(b=>b.id===editing?{...b,...payload}:b));setNotice(`Booking updated: ${payload.roomNumber} · ${bookedDays(payload.startDate,payload.endDate)}.`);}else{setBookings([...bookings,{...payload,id:'b-'+Date.now()}]);setNotice('Room reserved.');}setForm({...formEmpty});setEditing(null);setError('');}
  function reset(){setBookings(seed);setForm({...formEmpty});setEditing(null);setWeek('2026-11-09');setNotice('Example bookings restored.');setError('');setView('All rooms');}
  function check(){setNotice('');setError('');let e=issue(form,bookings,editing);if(e){setError(e);}else setNotice('No conflict detected for the selected dates.');}
  return <div className="room-app"><header className="topbar"><div className="mark"><span className="mark-sq">R</span><span><strong>room<span>grid</span></strong><small>Campus spaces</small></span></div><nav><button className={tab==='Availability'?'selected':''} onClick={()=>setTab('Availability')}>Availability</button><button className={tab==='My bookings'?'selected':''} onClick={()=>{setTab('My bookings');document.getElementById('my-reservations')?.scrollIntoView({behavior:'smooth'});}}>My bookings</button><button onClick={reset}>Reset demo</button></nav><div className="member"><span>Student dashboard</span><div className="profile">YOU</div></div></header>
@@ -83,8 +106,8 @@ export default function App(){
     <div className="calendar-controls"><label>Location <select value={view} onChange={e=>setView(e.target.value)}><option>All rooms</option>{rooms.map(r=><option key={r}>{r}</option>)}</select></label><span className="legend"><i className="booked"/> Reserved</span><span className="legend"><i className="free"/> Available</span><p>Click a day to enter it in the form.</p></div>
     <div className="calendar-scroll"><div className="room-cal"><div className="corner">ROOM / DATE</div>{days.map(d=><div className="dayhead" key={d}><strong>{weekDay(d)}</strong><span>{human(d)}</span></div>)}{roomList.map((room,i)=><React.Fragment key={room}><div className="roomname"><strong>{room}</strong><small>Study room · {room[0]}</small></div>{days.map(day=>{const b=occupied(room,day);return <button key={room+day} title={`${room}, ${day}: ${b?'Reserved':'Available'}`} className={'slot '+(b?'taken':'available')} onClick={()=>pick(room,day)}><span>{b?'Booked':'Open'}</span>{b&&<small>{b.owner==='you'?'Your booking':'Reserved'}</small>}</button>})}</React.Fragment>)}</div></div>
     <p className="calendar-note">Cells show individual dates. Reservations may span several dates; a day marked "Open" does not guarantee the full range you choose will be available.</p>
-    <section id="my-reservations" className="reservations"><div className="reservations-head"><h2>Your bookings</h2><span>{myBookings.length} current records</span></div><div className="reservations-list">{myBookings.map(b=><article key={b.id} className="reservation"><div className="room-chip">{b.roomNumber}</div><div className="reservation-body"><strong>{human(b.startDate)} – {human(b.endDate)}</strong><small>{b.purpose||'No purpose entered'}</small></div><button onClick={()=>edit(b)}>Change</button></article>)}{myBookings.length===0&&<p>No reservations.</p>}</div></section></section>
-    <aside className="booking-pane" id="booking-form"><div className="panel-tag"><span>BOOK A ROOM</span><span>FORM 01</span></div><h2>{editing?'Change reservation':'Make a reservation'}</h2><p className="booking-description">Use this panel to request a room for your study group, meeting or activity.</p>{notice&&<div className="success" role="status">{notice}</div>}{error&&<div className="error" role="alert">{error}</div>}<form onSubmit={submit}><label><span>Room number</span><input list="rooms" placeholder="e.g., B2-104" value={form.roomNumber} onChange={e=>setForm(f=>({...f,roomNumber:e.target.value}))}/><datalist id="rooms">{rooms.map(r=><option key={r} value={r}/>)}</datalist></label><div className="date-pair"><label><span>Start date</span><input type="date" value={form.startDate} onChange={e=>setForm(f=>({...f,startDate:e.target.value}))}/></label><label><span>End date</span><input type="date" value={form.endDate} onChange={e=>setForm(f=>({...f,endDate:e.target.value}))}/></label></div><label><span>Purpose / optional</span><textarea rows="5" placeholder="Meeting, group study..." value={form.purpose} onChange={e=>setForm(f=>({...f,purpose:e.target.value}))}/></label><p className="helper">Start and end dates are required. Reservations cannot overlap existing bookings for the same room.</p><button className="availability-check" type="button" onClick={check}>Check availability</button><button className="reserve-button" type="submit">{editing?'Save booking':'Confirm booking'}</button>{editing&&<button className="cancel-edit" type="button" onClick={()=>{setEditing(null);setForm({...formEmpty});setError('')}}>Cancel editing</button>}</form><div className="right-foot"><span>✦</span> Need a room for a group? Find an open date and submit your request.</div></aside></div>
+    <section id="my-reservations" className="reservations"><div className="reservations-head"><h2>Your bookings</h2><span>{myBookings.length} current records</span></div><div className="reservations-list">{myBookings.map(b=><article key={b.id} className={'reservation'+(b.id===editing?' is-editing':'')}><div className="room-chip">{b.roomNumber}</div><div className="reservation-body"><strong>{bookedDays(b.startDate,b.endDate)} · {dayLabel(dayCount(b.startDate,b.endDate))}</strong><small>{b.purpose||'No purpose entered'}</small></div><button onClick={()=>edit(b)}>{b.id===editing?'Editing…':'Change'}</button></article>)}{myBookings.length===0&&<p>No reservations.</p>}</div></section></section>
+    <aside className={'booking-pane'+(flash?' flash':'')} id="booking-form"><div className="panel-tag"><span>BOOK A ROOM</span><span>FORM 01</span></div><h2>{editing?'Change reservation':'Make a reservation'}</h2><p className="booking-description">{editing?'Change the room, dates or purpose, then save. Your booking stays as it is until you save.':'Use this panel to request a room for your study group, meeting or activity.'}</p>{editingRow&&<div className="reservation edit-banner"><div className="room-chip">{editingRow.roomNumber}</div><div className="reservation-body"><strong>Editing your booking</strong><small>{bookedDays(editingRow.startDate,editingRow.endDate)} · {dayLabel(dayCount(editingRow.startDate,editingRow.endDate))}</small></div></div>}{notice&&<div className="success" role="status">{notice}</div>}{error&&<div className="error" role="alert">{error}</div>}<form onSubmit={submit}><label><span>Room number</span><input ref={roomInput} list="rooms" placeholder="e.g., B2-104" value={form.roomNumber} onChange={e=>setForm(f=>({...f,roomNumber:e.target.value}))}/><datalist id="rooms">{rooms.map(r=><option key={r} value={r}/>)}</datalist></label><div className="date-pair"><label><span>Start date</span><input type="date" value={form.startDate} onChange={e=>setForm(f=>({...f,startDate:e.target.value}))}/></label><label><span>End date</span><input type="date" value={form.endDate} onChange={e=>setForm(f=>({...f,endDate:e.target.value}))}/></label></div>{datesValid&&<p className="helper" aria-live="polite">You'll have {form.roomNumber.trim()||'the room'} on {bookedDays(form.startDate,form.endDate)} ({dayLabel(dayCount(form.startDate,form.endDate))}). Free again {human(form.endDate)}.</p>}<label><span>Purpose / optional</span><textarea rows="5" placeholder="Meeting, group study..." value={form.purpose} onChange={e=>setForm(f=>({...f,purpose:e.target.value}))}/></label><p className="helper">Start and end dates are required. Reservations cannot overlap existing bookings for the same room.</p><button className="availability-check" type="button" onClick={check}>Check availability</button><button className="reserve-button" type="submit">{editing?'Save booking':'Confirm booking'}</button>{editing&&<button className="availability-check cancel-edit" type="button" onClick={discard}>Discard changes</button>}</form><div className="right-foot"><span>✦</span> {editing?'Discarding keeps your original booking exactly as it was.':'Need a room for a group? Find an open date and submit your request.'}</div></aside></div>
   </main><footer>ROOMGRID / Academic campus demo — local browser data only.</footer>
  </div>;
 }
