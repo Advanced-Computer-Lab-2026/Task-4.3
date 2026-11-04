@@ -1,0 +1,275 @@
+[
+  {
+    "file": "docs/screenshots/before/01-desktop-availability-and-form.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 88759,
+    "sha256": "07d963e8d9919d49b3da173aa472140717bfd0f803d2bce2d3b7c5366ba5a532"
+  },
+  {
+    "file": "docs/screenshots/before/02-desktop-full-page.png",
+    "width": 1440,
+    "height": 2314,
+    "bytes": 177313,
+    "sha256": "211a7189c00fe9b9308d0a9bda609115cdc653fa1dbab205ed8fcf3345f94f6b"
+  },
+  {
+    "file": "docs/screenshots/before/03-calendar-end-date-not-occupied.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 66653,
+    "sha256": "420c96b245910ef6177f75a41dd23ff46c53d786c54a7f21928c59ed9238f388"
+  },
+  {
+    "file": "docs/screenshots/before/04-booked-day-starts-a-new-request.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 82399,
+    "sha256": "3727cf3715c67f557a484851d2eb24eb8ab95e26b3413d96c3fac2d7dda08fb8"
+  },
+  {
+    "file": "docs/screenshots/before/05-confirm-shows-generic-error.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 84495,
+    "sha256": "918690d8eadc14cadb55ed2fa027931b7bb84d60cf42627bd914adae605d59e2"
+  },
+  {
+    "file": "docs/screenshots/before/06-check-shows-specific-overlap-error.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 84606,
+    "sha256": "3e4179271f34047513d8adf7417e8d87dd38056988a5d66616333785f671a145"
+  },
+  {
+    "file": "docs/screenshots/before/07-missing-room-blames-the-dates.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 84534,
+    "sha256": "3187656d8d5ed2db0429f4c298a1c5bc5426b62e7ee8f725d8701d75dcd2df63"
+  },
+  {
+    "file": "docs/screenshots/before/08-same-day-confirm-is-generic.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 84258,
+    "sha256": "5f9d47d79716a65ef098ae464f30494d8d683db6c8054a67b452221d135c4eec"
+  },
+  {
+    "file": "docs/screenshots/before/09-same-day-check-is-specific.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 83703,
+    "sha256": "a0cdee34ddb497a70df7d9a1eefc008f3ac37b6c8c2dbfb398a6dc839083adab"
+  },
+  {
+    "file": "docs/screenshots/before/10-your-bookings-below-the-calendar.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 76941,
+    "sha256": "d40ce3dcc4d9bea95c9674665d412332db439e810582013be4bb16470ffcab3f"
+  },
+  {
+    "file": "docs/screenshots/before/11-change-leaves-the-form-offscreen.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 76941,
+    "sha256": "d40ce3dcc4d9bea95c9674665d412332db439e810582013be4bb16470ffcab3f"
+  },
+  {
+    "file": "docs/screenshots/before/12-edit-form-only-after-manual-scroll.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 111254,
+    "sha256": "cc704bfa05c930d5c0fd3868340a18c10fc977f9454615b1355ae0a6d6a7a7fd"
+  },
+  {
+    "file": "docs/screenshots/before/13-mobile-top.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 46396,
+    "sha256": "bdc0b4678e7131c5f0a94ba5e58fc8607996838c04591b714dead196978ac235"
+  },
+  {
+    "file": "docs/screenshots/before/14-mobile-your-bookings.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 53221,
+    "sha256": "e0c434b052c3b9b62539d2e20ca502c6057045a475f4a71ddb44412d180bd398"
+  },
+  {
+    "file": "docs/screenshots/before/15-mobile-booking-form.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 40898,
+    "sha256": "b9a6a243574518246db0c058fd1bb7a44e787347e8535a0af9dff7c259c83cfe"
+  },
+  {
+    "file": "docs/screenshots/after/01-desktop-stay-search.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 154730,
+    "sha256": "521d7ba314247df6d2494f89ead6c92cfa50a2bcc712ef67e728a0ecf048a1dc"
+  },
+  {
+    "file": "docs/screenshots/after/02-desktop-range-beyond-week.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 167603,
+    "sha256": "a1a09738dc3d549e780a9250545daf86b06e8e9a0a355395eb32bcd714f7bdaa"
+  },
+  {
+    "file": "docs/screenshots/after/03-desktop-booked-day-details.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 151156,
+    "sha256": "fba5ff95c1773fc9d6b4ccbfd1ac31dbc59a6705c59d856eda1406655c0375ce"
+  },
+  {
+    "file": "docs/screenshots/after/04-desktop-missing-fields-error.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 143996,
+    "sha256": "6048d2721461bc8b33ec4999308824243c0e9303746f6a3f6169a3671280f87b"
+  },
+  {
+    "file": "docs/screenshots/after/05-desktop-same-day-error.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 143072,
+    "sha256": "58141f0240e42ae579852c8b9c297b96025f69fbad492f431b62ffe90e47ff0e"
+  },
+  {
+    "file": "docs/screenshots/after/06-desktop-overlap-error.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 145766,
+    "sha256": "d8b071df09ff12d59a566f7590aced25c9cd1ad91269299885470ae2511e4a5e"
+  },
+  {
+    "file": "docs/screenshots/after/07-desktop-my-bookings.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 147285,
+    "sha256": "1a31fdc9b212ca6022335aacbe27016cd47ce78e2c9e1011b116d736962f0e92"
+  },
+  {
+    "file": "docs/screenshots/after/08-desktop-editing.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 150868,
+    "sha256": "80b48067b523d56c3adf902f9178bfed598f13b5ffded55de98e16e6c9b5e0d9"
+  },
+  {
+    "file": "docs/screenshots/after/09-desktop-booking-confirmed.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 157223,
+    "sha256": "61f7251860aac98bec1d617dea41dbc9a572217972757b287b7900436ff518bb"
+  },
+  {
+    "file": "docs/screenshots/after/10-mobile-availability.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 63010,
+    "sha256": "e75a75b70b51af72a41f1afd6b3f88975f6756a97da01390552a861a184c0e03"
+  },
+  {
+    "file": "docs/screenshots/after/11-mobile-stay-search.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 74921,
+    "sha256": "fca3493bf54fd8bbb92f8bbc0c1bff752cb0db86449e1655ca77f4c7c67b284a"
+  },
+  {
+    "file": "docs/screenshots/after/12-mobile-my-bookings.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 39602,
+    "sha256": "843ebd200ea1cafb3153de42a21866f93aafc52b5d9134000ea4a4627370b968"
+  },
+  {
+    "file": "docs/screenshots/after/13-mobile-editing.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 40092,
+    "sha256": "e6dc2e97256cec478b2aec7715f598bd9e2c3af8a19f1916d8bd48524550b1b7"
+  },
+  {
+    "file": "docs/audit/desktop-edit.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 157618,
+    "sha256": "3b0d5fca4d1b8ea448bbee3cab4aa8d2cd3a3c43e722ca953a212c90899f9156"
+  },
+  {
+    "file": "docs/audit/desktop-my-bookings.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 152303,
+    "sha256": "50e7fff09ba9ba0ec7dffc9c269baaad04879af7c8383485af656eea1dcc6b05"
+  },
+  {
+    "file": "docs/audit/desktop-overlap-error.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 148847,
+    "sha256": "1f1de5586f768cb3853f9ca76bf47b4e1b0e5432d853e8f99de3cb1b727b6f02"
+  },
+  {
+    "file": "docs/audit/desktop-stay-search.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 152574,
+    "sha256": "95e2fa20dc8e38ea0cb8e6c247be06d504c25856cbc771dcccd214f033aac959"
+  },
+  {
+    "file": "docs/audit/desktop-success.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 157166,
+    "sha256": "627956f9f6d1ca5f31a37d24bb9356bad406fd8b693093191e15f02a17731455"
+  },
+  {
+    "file": "docs/audit/mobile-availability.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 63840,
+    "sha256": "72518c6d3fabd47cb6791828fd63ded8db4a9e7100468d286cb232793b644ad8"
+  },
+  {
+    "file": "docs/audit/mobile-edit.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 57423,
+    "sha256": "66e25639c020399be595c85eec4ec75a3ea06ffe053f473a26bbe9ebadb72a83"
+  },
+  {
+    "file": "docs/audit/mobile-my-bookings.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 60901,
+    "sha256": "c5cc9c10c2f3091662dc3655d532a59faa60a8d6c86a57f7348b70f05afdb697"
+  },
+  {
+    "file": "docs/audit/mobile-stay-search.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 67014,
+    "sha256": "1b71b5a205a7528a7cd09e1268822d5a002a46baa46a48075e5a523bbfdc8bb9"
+  },
+  {
+    "file": "docs/audit/probe-malformed-storage.png",
+    "width": 1440,
+    "height": 900,
+    "bytes": 5853,
+    "sha256": "f8f62cd9d4fe13caa016cc1d218e62abece345ce8f33e2eb5fa714832d7e000b"
+  },
+  {
+    "file": "docs/audit/probe-mobile-edit.png",
+    "width": 390,
+    "height": 844,
+    "bytes": 40114,
+    "sha256": "ecd84a1b36279ee8a12d6099cb49feb3489231444eb5e62a47abd1e112a9874e"
+  }
+]

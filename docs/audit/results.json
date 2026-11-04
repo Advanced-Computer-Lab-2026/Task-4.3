@@ -1,0 +1,460 @@
+{
+  "date": "2026-11-04",
+  "url": "http://127.0.0.1:4175/",
+  "browser": "Chrome via CDP; Browser plugin and Playwright unavailable",
+  "browserVersion": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.74",
+    "revision": "@d331de35ca8ab1358c7a17e4bd41627d55eaef51",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.25"
+  },
+  "viewports": [
+    "1440x900",
+    "390x844"
+  ],
+  "checks": [
+    {
+      "name": "Exact starter seed retained (40 records, all fields)",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Identity, meaningful UI, no error overlay",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "18 rooms; 8 owned records",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Mobile viewport is 390; edit heading below sticky header",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Tablist supports ArrowRight navigation",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Existing directory room is saved in canonical case",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Extended-year dates do not bypass YYYY-MM-DD contract",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Chronologically ordered extended years rejected before save",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "All required fields missing",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "All required fields missing: Check and Confirm agree",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "All required fields missing: invalid control describes error",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Room missing",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Room missing: Check and Confirm agree",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Room missing: invalid control describes error",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Start missing",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Start missing: Check and Confirm agree",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Start missing: invalid control describes error",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "End missing",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "End missing: Check and Confirm agree",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "End missing: invalid control describes error",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Start equals end",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Start equals end: Check and Confirm agree",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Start equals end: invalid control describes error",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "End before start",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "End before start: Check and Confirm agree",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "End before start: invalid control describes error",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "One-day overlap",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "One-day overlap: Check and Confirm agree",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "One-day overlap: invalid control describes error",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Fully inside existing",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Fully inside existing: Check and Confirm agree",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Fully inside existing: invalid control describes error",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Fully contains existing",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Fully contains existing: Check and Confirm agree",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Fully contains existing: invalid control describes error",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Case/whitespace overlap",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Case/whitespace overlap: Check and Confirm agree",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Case/whitespace overlap: invalid control describes error",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Corrections clear stale errors",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Adjacent booking accepted at both boundaries; purpose optional",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Repeated submit does not duplicate booking",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Another occupied room still rejects identical dates",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Different-room identical dates do not falsely conflict",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Refresh after save retains new bookings",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "My bookings contains only owned records, including new records",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Newly created booking can be edited",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Reset restores exact original records",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Whole stay 2026-11-11 to 2026-11-13",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Select copies exact search dates",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Whole stay 2026-11-18 to 2026-11-21",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Whole stay 2026-11-08 to 2026-11-22",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Whole stay 2026-12-01 to 2026-12-04",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Outside-week jump preserves full-stay result",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Booked day gives read-only details; no conflicting draft",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Closing details restores source cell focus",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Owned booked day edits exact original reservation",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Unchanged edit excludes self; same ID and count",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Availability excludes edited reservation but includes other conflicts",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Edit into another range rejected without mutation",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Edit exclusive last day adjacent to next booking accepted",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Edit first day accepted",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Refresh during edit drops only unsaved draft",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Cancel clears draft and returns focus",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Reset clears edit/search/detail/filter state",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Reset after modifications is byte-equivalent to starter",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Reset survives refresh",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Mobile real viewport, no page overflow; navigation targets >=44px",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Mobile select makes form heading visible",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Mobile cancel heading is not hidden by header",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Tablist End selects My bookings",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Tablist Home selects Availability",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Tablist wraps with ArrowLeft",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Keyboard Edit opens editor",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "All description references resolve",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Keyboard Tab walk 1440px #availability-tab",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Keyboard Tab walk 1440px #my-bookings-tab",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Keyboard Tab walk 390px #availability-tab",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Keyboard Tab walk 390px #my-bookings-tab",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Rendered text contrast meets AA thresholds in initial desktop view",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Date-only display stable in America/Los_Angeles",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Date-only display stable in Pacific/Kiritimati",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Date-only display stable in Africa/Cairo",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Malformed storage is preserved with recovery feedback",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Invalid JSON is preserved with recovery feedback",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Storage write failure is explicit; failed save keeps original data and draft",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "No application runtime errors or console warnings",
+      "pass": true,
+      "actual": true
+    }
+  ],
+  "errors": [],
+  "requests": [
+    "http://127.0.0.1:4175/",
+    "http://127.0.0.1:4175/assets/index-BvSoxOy2.js",
+    "http://127.0.0.1:4175/assets/index-s0wKgYHZ.css",
+    "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap",
+    "https://fonts.gstatic.com/l/font?kit=rP2-p2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAopwDRUUHvP-6oMc49xLtf0DPCg&skey=cd068b3e1b767e51&v=v17",
+    "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+    "https://fonts.gstatic.com/l/font?kit=V8mloQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7aUSkoFDG70JFMnmBvY_Q8kCxH&skey=c04ef52a878abc32&v=v22",
+    "http://127.0.0.1:4175/favicon.ico"
+  ],
+  "failedRequests": []
+}

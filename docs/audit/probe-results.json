@@ -1,0 +1,286 @@
+{
+  "date": "2026-11-04",
+  "url": "http://127.0.0.1:4175/",
+  "browser": "Chrome via CDP; Browser plugin and Playwright unavailable",
+  "viewports": [
+    "1440x900",
+    "390x844"
+  ],
+  "checks": [
+    {
+      "name": "Exact starter seed retained (40 records, all fields)",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Identity, meaningful UI, no error overlay",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "18 rooms; 8 owned records",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Mobile viewport is 390; edit heading below sticky header",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Tablist supports ArrowRight navigation",
+      "pass": false,
+      "actual": false
+    },
+    {
+      "name": "Existing directory room is saved in canonical case",
+      "pass": false,
+      "actual": false
+    },
+    {
+      "name": "Extended-year dates do not bypass YYYY-MM-DD contract",
+      "pass": true,
+      "actual": true
+    },
+    {
+      "name": "Malformed stored array does not crash app",
+      "pass": false,
+      "actual": false
+    },
+    {
+      "name": "No application runtime errors or console warnings",
+      "pass": false,
+      "actual": false
+    }
+  ],
+  "errors": [
+    {
+      "type": "error",
+      "args": [
+        {
+          "type": "object",
+          "subtype": "error",
+          "className": "TypeError",
+          "description": "TypeError: Cannot read properties of null (reading 'owner')\n    at http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:62789\n    at Array.filter (<anonymous>)\n    at Yd (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:62777)\n    at Li (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:30:16959)\n    at uc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:43746)\n    at lc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39544)\n    at Pd (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39475)\n    at vl (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39332)\n    at Jo (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:35745)\n    at tc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:34701)",
+          "objectId": "-9176519264068661522.3.1",
+          "preview": {
+            "type": "object",
+            "subtype": "error",
+            "description": "TypeError: Cannot read properties of null (reading 'owner')\n    at http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:62789\n    at Array.filter (<anonymous>)\n    at Yd (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:62777)\n    at Li (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:30:16959)\n    at uc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:43746)\n    at lc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39544)\n    at Pd (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39475)\n    at vl (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39332)\n    at Jo (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:35745)\n    at tc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:34701)",
+            "overflow": false,
+            "properties": [
+              {
+                "name": "stack",
+                "type": "string",
+                "value": "TypeError: Cannot read properties of null (reading…127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:34701)"
+              },
+              {
+                "name": "message",
+                "type": "string",
+                "value": "Cannot read properties of null (reading 'owner')"
+              }
+            ]
+          }
+        }
+      ],
+      "executionContextId": 3,
+      "timestamp": 1793795738473.893,
+      "stackTrace": {
+        "callFrames": [
+          {
+            "functionName": "Uo",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 160
+          },
+          {
+            "functionName": "Us.n.callback",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 386
+          },
+          {
+            "functionName": "Ru",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 29,
+            "columnNumber": 15505
+          },
+          {
+            "functionName": "Gu",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 31920
+          },
+          {
+            "functionName": "ec",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 31341
+          },
+          {
+            "functionName": "Nd",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 30900
+          },
+          {
+            "functionName": "zd",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 40653
+          },
+          {
+            "functionName": "Rt",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 40020
+          },
+          {
+            "functionName": "tc",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 35002
+          },
+          {
+            "functionName": "N",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 16,
+            "columnNumber": 1561
+          },
+          {
+            "functionName": "Dt",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 16,
+            "columnNumber": 1929
+          }
+        ]
+      }
+    },
+    {
+      "exceptionId": 1,
+      "text": "Uncaught",
+      "lineNumber": 31,
+      "columnNumber": 62788,
+      "scriptId": "4",
+      "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+      "stackTrace": {
+        "callFrames": [
+          {
+            "functionName": "",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 62788
+          },
+          {
+            "functionName": "Yd",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 62776
+          },
+          {
+            "functionName": "Li",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 29,
+            "columnNumber": 16958
+          },
+          {
+            "functionName": "uc",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 43745
+          },
+          {
+            "functionName": "lc",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 39543
+          },
+          {
+            "functionName": "Pd",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 39474
+          },
+          {
+            "functionName": "vl",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 39331
+          },
+          {
+            "functionName": "Jo",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 35744
+          },
+          {
+            "functionName": "tc",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 31,
+            "columnNumber": 34700
+          },
+          {
+            "functionName": "N",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 16,
+            "columnNumber": 1561
+          },
+          {
+            "functionName": "Dt",
+            "scriptId": "4",
+            "url": "http://127.0.0.1:4175/assets/index-Ck7X8iAS.js",
+            "lineNumber": 16,
+            "columnNumber": 1929
+          }
+        ]
+      },
+      "exception": {
+        "type": "object",
+        "subtype": "error",
+        "className": "TypeError",
+        "description": "TypeError: Cannot read properties of null (reading 'owner')\n    at http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:62789\n    at Array.filter (<anonymous>)\n    at Yd (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:62777)\n    at Li (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:30:16959)\n    at uc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:43746)\n    at lc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39544)\n    at Pd (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39475)\n    at vl (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39332)\n    at Jo (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:35745)\n    at tc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:34701)",
+        "objectId": "-9176519264068661522.3.2",
+        "preview": {
+          "type": "object",
+          "subtype": "error",
+          "description": "TypeError: Cannot read properties of null (reading 'owner')\n    at http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:62789\n    at Array.filter (<anonymous>)\n    at Yd (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:62777)\n    at Li (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:30:16959)\n    at uc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:43746)\n    at lc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39544)\n    at Pd (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39475)\n    at vl (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:39332)\n    at Jo (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:35745)\n    at tc (http://127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:34701)",
+          "overflow": false,
+          "properties": [
+            {
+              "name": "stack",
+              "type": "string",
+              "value": "TypeError: Cannot read properties of null (reading…127.0.0.1:4175/assets/index-Ck7X8iAS.js:32:34701)"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "value": "Cannot read properties of null (reading 'owner')"
+            }
+          ]
+        }
+      },
+      "executionContextId": 3
+    }
+  ]
+}
