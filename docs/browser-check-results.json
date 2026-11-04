@@ -1,0 +1,309 @@
+{
+ "results": [
+  {
+   "name": "View 18 rooms",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Browse bookings: week 1 shows reserved and own days",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Week navigation",
+   "ok": true,
+   "detail": "9 Nov – 15 Nov -> 16 Nov – 22 Nov"
+  },
+  {
+   "name": "Room filter shows one room",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Skip link reaches the form in 3 key presses",
+   "ok": true,
+   "detail": "Skip to booking form -> booking-form-title -> room-number"
+  },
+  {
+   "name": "Finder lists exact free rooms for 13-16 Nov",
+   "ok": true,
+   "detail": "A2-106,A3-209,B1-206,B1-207,B3-301,C2-202,D1-101"
+  },
+  {
+   "name": "Finder states count",
+   "ok": true,
+   "detail": "7 of 18 rooms free from 13 Nov until 16 Nov"
+  },
+  {
+   "name": "Grid rows tagged free for your dates",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Finder fills the form with room and dates",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Focus moves to form",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Finder rejects equal dates inline",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Finder has no stale results after invalid search",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Check availability confirms a free range",
+   "ok": true,
+   "detail": "A3-209 is free from 13 Nov until 15 Nov. Nothing is booked until you confirm."
+  },
+  {
+   "name": "Check availability does not book",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Stale success clears when dates change",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Create valid reservation",
+   "ok": true,
+   "detail": "Room reserved: A3-209, 13 Nov until 15 Nov."
+  },
+  {
+   "name": "New booking appears in grid as yours",
+   "ok": true,
+   "detail": "Yours Change"
+  },
+  {
+   "name": "Refresh persistence",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Reset demo restores originals",
+   "ok": true,
+   "detail": "Example bookings restored."
+  },
+  {
+   "name": "Purpose is optional",
+   "ok": true,
+   "detail": "{\"roomNumber\":\"A3-209\",\"startDate\":\"2026-11-13\",\"endDate\":\"2026-11-15\",\"purpose\":\"\",\"owner\":\"you\",\"id\":\"b-1793796372130\"}"
+  },
+  {
+   "name": "Empty purpose shown clearly",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Reject missing room",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Reject equal dates",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Reject reversed dates",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Reject conflicting same-room dates with detail",
+   "ok": true,
+   "detail": "Another student has A1-203 from 9 Nov until 11 Nov. Pick other dates or another room."
+  },
+  {
+   "name": "Date fields marked invalid",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Conflict recovery shows free rooms",
+   "ok": true,
+   "detail": "4 of 18 rooms free from 10 Nov until 12 Nov"
+  },
+  {
+   "name": "Conflict error clears once room changes",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Accept same dates in a different room",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Lowercase room shows in grid",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Unknown room warns",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Unknown room still accepted, as in the original",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "My bookings is a real view",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Change shows form on screen with banner",
+   "ok": true,
+   "detail": "Editing A1-203, 17 Nov until 19 Nov. Saving replaces this booking. Choose new dates below or in the calendar."
+  },
+  {
+   "name": "Change moves focus to form",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Change opens the booking week",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Calendar click keeps edit mode, purpose and length",
+   "ok": true,
+   "detail": "2026-11-20 2026-11-22"
+  },
+  {
+   "name": "Edit my own reservation, no duplicate",
+   "ok": true,
+   "detail": "{\"id\":\"demo-3\",\"roomNumber\":\"A1-203\",\"startDate\":\"2026-11-20\",\"endDate\":\"2026-11-22\",\"purpose\":\"Group assignment moved\",\"owner\":\"you\"}"
+  },
+  {
+   "name": "Edit success message",
+   "ok": true,
+   "detail": "Booking updated: A1-203, 20 Nov until 22 Nov."
+  },
+  {
+   "name": "Own grid day opens edit",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Reject conflict introduced through editing",
+   "ok": true,
+   "detail": "Another student has B2-104 from 13 Nov until 15 Nov. Pick other dates or another room."
+  },
+  {
+   "name": "Editing does not clash with itself",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Cancel editing leaves booking alone",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Other users' days are not interactive",
+   "ok": true,
+   "detail": "50 static cells"
+  },
+  {
+   "name": "Only own bookings have Change",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Typed purpose survives a calendar click",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Mobile: no horizontal page scroll",
+   "ok": true,
+   "detail": "{\"scrollW\":390,\"vw\":390,\"pageH\":2496,\"roomPos\":\"sticky\"}"
+  },
+  {
+   "name": "Mobile: room names stay visible when scrolled",
+   "ok": true,
+   "detail": "offset 1"
+  },
+  {
+   "name": "Mobile: tapping a day brings form on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Mobile: Change brings form on screen",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "No horizontal page scroll at 768px",
+   "ok": true,
+   "detail": "768"
+  },
+  {
+   "name": "No horizontal page scroll at 1024px",
+   "ok": true,
+   "detail": "1024"
+  },
+  {
+   "name": "No horizontal page scroll at 1100px",
+   "ok": true,
+   "detail": "1100"
+  },
+  {
+   "name": "No horizontal page scroll at 1280px",
+   "ok": true,
+   "detail": "1280"
+  },
+  {
+   "name": "Sticky form fits short screens",
+   "ok": true,
+   "detail": "{\"top\":16,\"bottom\":604,\"scrollable\":true}"
+  },
+  {
+   "name": "No new runtime errors",
+   "ok": true,
+   "detail": "error Failed to load resource: the server responded with a status of 404 (Not Found) @http://127.0.0.1:4173/favicon.ico"
+  }
+ ],
+ "data": {
+  "metrics": {
+   "textNodes": 307,
+   "under12": 0,
+   "low": {},
+   "pageHeight": 1755
+  },
+  "firstTab": "Skip to booking form",
+  "skipLands": "booking-form-title",
+  "afterSkipTab": "room-number",
+  "mobile": {
+   "scrollW": 390,
+   "vw": 390,
+   "pageH": 2496,
+   "roomPos": "sticky"
+  },
+  "shortForm": {
+   "top": 16,
+   "bottom": 604,
+   "scrollable": true
+  },
+  "errors": [
+   "error Failed to load resource: the server responded with a status of 404 (Not Found) @http://127.0.0.1:4173/favicon.ico"
+  ]
+ }
+}

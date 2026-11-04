@@ -1,0 +1,48 @@
+export const STORAGE='acl-roomgrid-18rooms-v1';
+export const rooms=['A1-203', 'A2-106', 'A2-107', 'A3-208', 'A3-209', 'B1-205', 'B1-206', 'B1-207', 'B2-104', 'B2-105', 'B3-301', 'C1-102', 'C1-103', 'C2-201', 'C2-202', 'C3-101', 'C3-102', 'D1-101'];
+export const DEMO_WEEK='2026-11-09';
+// End dates are exclusive; all sample reservations use non-overlapping date ranges.
+const sampleRows=[
+ ['A1-203','2026-11-09','2026-11-11','Peer tutoring','other'],
+ ['A1-203','2026-11-13','2026-11-15','Architecture workshop','other'],
+ ['A1-203','2026-11-17','2026-11-19','Group assignment','you'],
+ ['A2-106','2026-11-10','2026-11-13','Seminar preparation','other'],
+ ['A2-106','2026-11-16','2026-11-19','Study circle','other'],
+ ['A2-107','2026-11-09','2026-11-10','Student club planning','you'],
+ ['A2-107','2026-11-12','2026-11-15','Project demo rehearsal','other'],
+ ['A2-107','2026-11-16','2026-11-19','Study meeting','other'],
+ ['A3-208','2026-11-11','2026-11-14','Presentation practice','other'],
+ ['A3-208','2026-11-16','2026-11-18','Tutorial group','other'],
+ ['A3-209','2026-11-10','2026-11-12','Study session','other'],
+ ['B1-205','2026-11-09','2026-11-11','Meeting','other'],
+ ['B1-205','2026-11-13','2026-11-15','Team discussion','other'],
+ ['B1-205','2026-11-16','2026-11-18','Course project','other'],
+ ['B1-206','2026-11-11','2026-11-13','Exam revision','other'],
+ ['B1-206','2026-11-17','2026-11-20','Debate practice','you'],
+ ['B1-207','2026-11-10','2026-11-12','Group study','you'],
+ ['B1-207','2026-11-16','2026-11-19','Engineering project','other'],
+ ['B2-104','2026-11-09','2026-11-11','Weekly study group','you'],
+ ['B2-104','2026-11-13','2026-11-15','Team planning','other'],
+ ['B2-104','2026-11-17','2026-11-19','Workshop preparation','other'],
+ ['B2-105','2026-11-12','2026-11-15','Club meeting','other'],
+ ['B2-105','2026-11-16','2026-11-18','Student committee','other'],
+ ['B3-301','2026-11-09','2026-11-10','Debate practice','other'],
+ ['B3-301','2026-11-11','2026-11-13','Group preparation','other'],
+ ['B3-301','2026-11-18','2026-11-20','Portfolio review','other'],
+ ['C1-102','2026-11-10','2026-11-14','Capstone meeting','other'],
+ ['C1-102','2026-11-16','2026-11-19','Revision session','other'],
+ ['C1-103','2026-11-09','2026-11-12','Group project','other'],
+ ['C1-103','2026-11-14','2026-11-16','Student society','you'],
+ ['C2-201','2026-11-12','2026-11-15','Project sprint','other'],
+ ['C2-201','2026-11-16','2026-11-19','Robotics club','other'],
+ ['C2-202','2026-11-09','2026-11-11','Lab preparation','other'],
+ ['C2-202','2026-11-18','2026-11-20','Teaching assistant session','other'],
+ ['C3-101','2026-11-12','2026-11-14','Presentation rehearsal','you'],
+ ['C3-101','2026-11-14','2026-11-16','Design workshop','other'],
+ ['C3-101','2026-11-18','2026-11-20','Study group','other'],
+ ['C3-102','2026-11-11','2026-11-15','Research meeting','other'],
+ ['D1-101','2026-11-10','2026-11-13','Team check-in','other'],
+ ['D1-101','2026-11-16','2026-11-18','Group assignment','you'],
+];
+export const seed=sampleRows.map(([roomNumber,startDate,endDate,purpose,owner],index)=>({id:`demo-${index+1}`,roomNumber,startDate,endDate,purpose,owner}));
+export function read(){try{let a=JSON.parse(localStorage.getItem(STORAGE));return Array.isArray(a)?a:seed;}catch{return seed;}}
