@@ -52,7 +52,10 @@ function addDays(iso,days){const t=new Date(`${iso}T12:00:00Z`);t.setUTCDate(t.g
 function human(iso){return new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB',{timeZone:'UTC',day:'numeric',month:'short'});}
 function weekDay(iso){return new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB',{timeZone:'UTC',weekday:'short'});}
 function issue(form,bookings,id){
- if(!form.roomNumber.trim()||!form.startDate||!form.endDate)return 'Complete the room and both dates.';
+ if(!form.roomNumber.trim())return 'Enter a room number.';
+ if(!form.startDate&&!form.endDate)return 'Choose a start date and an end date.';
+ if(!form.startDate)return 'Choose a start date.';
+ if(!form.endDate)return 'Choose an end date.';
  if(form.endDate<=form.startDate)return 'End date must follow start date.';
  if(bookings.some(b=>b.id!==id&&b.roomNumber.toLowerCase()===form.roomNumber.trim().toLowerCase()&&form.startDate<b.endDate&&form.endDate>b.startDate))return 'This room is already booked for some of those dates.';
  return '';
