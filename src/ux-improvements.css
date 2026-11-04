@@ -1,0 +1,115 @@
+.calendar-controls .room-search {
+  align-items: stretch;
+  flex-direction: column;
+  flex: 1 1 210px;
+  gap: 5px;
+}
+
+.calendar-controls .room-search input {
+  min-width: 190px;
+  padding: 7px 9px;
+  border: 1px solid #dce8eb;
+  border-radius: 5px;
+  color: #3c6c76;
+  background: #fff;
+  font-size: 10px;
+}
+
+.calendar-controls .room-search input:focus-visible {
+  outline: 2px solid #1c9a96;
+  outline-offset: 2px;
+}
+
+.empty-rooms,
+.empty-bookings {
+  padding: 22px;
+  border: 1px dashed #cbdde1;
+  border-radius: 9px;
+  color: #71878e;
+  text-align: center;
+  font-size: 12px;
+}
+
+.bookings-page {
+  margin-top: 0;
+  padding: 24px;
+  border: 1px solid #dce7ec;
+  border-radius: 13px;
+  background: #fff;
+}
+
+.bookings-page .reservations-head {
+  margin-bottom: 20px;
+}
+
+.bookings-page .reservations-head h2 {
+  margin: 6px 0 0;
+  font-size: 22px;
+}
+
+.bookings-page .reservations-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.bookings-page .reservation {
+  padding: 14px;
+}
+
+.bookings-page .reservation > button,
+.empty-bookings button {
+  padding: 9px 13px;
+  border: 1px solid #c8d9de;
+  border-radius: 6px;
+  color: #246f7e;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.bookings-page .reservation > button:hover,
+.empty-bookings button:hover {
+  background: #edf8f7;
+}
+
+.empty-bookings p {
+  margin: 0 0 12px;
+}
+
+.cancel-edit {
+  display: block;
+  min-width: 150px;
+  margin: 14px auto 0;
+  padding: 10px 18px;
+  border: 1px solid #dca4a1;
+  border-radius: 7px;
+  color: #a53d39;
+  background: #fff4f2;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cancel-edit:hover {
+  background: #ffe8e5;
+}
+
+.cancel-edit:focus-visible,
+.bookings-page button:focus-visible,
+.topbar nav button:focus-visible {
+  outline: 2px solid #1c9a96;
+  outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+  .bookings-page {
+    padding: 14px;
+  }
+
+  .bookings-page .reservations-list {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-controls .room-search {
+    flex-basis: 100%;
+  }
+}
