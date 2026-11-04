@@ -19,10 +19,34 @@ Users can browse bookings across an example directory of 18 rooms, create a book
 
 - `roomNumber` — Room number: required text
 - `startDate` — Start date: YYYY-MM-DD
-- `endDate` — End date: YYYY-MM-DD, strictly after start
+- `endDate` — Last day: YYYY-MM-DD, inclusive in the form
 - `purpose` — Purpose: optional
 
 The demo supports create/edit and stores your updates in browser `localStorage` for this browser. **Reset demo** restores the example records. You can assume the current signed-in user is `You`.
+
+The booking form treats both the first and last selected days as included. Existing demo records retain their exclusive end-date representation internally; the interface converts at the form boundary.
+
+The **My bookings** navigation opens a dedicated dashboard for your reservations; selecting **Change** returns to availability and opens the edit form. Select the **YOU** profile button in the header to open the student profile dashboard.
+
+## Usability rescue
+
+1. **Find a room for the whole date range:** entering a first and last day shows every directory room available for all selected days, with buttons to choose a room directly. This avoids scanning each day in the calendar and mistaking a single open day for an available multi-day stay.
+2. **Make date ranges predictable:** the form and booking cards show inclusive first/last days. The app converts the selected last day to its existing exclusive end date when saving, so stored sample bookings and overlap checks keep their original representation.
+3. **Explain unsuccessful bookings:** conflicts name the reason and suggest changing rooms or dates; an unavailable selected room is also called out before submission. This replaces the previous generic failure message with an actionable one.
+
+**Design trade-off:** A broad redesign suggestion was to replace the room-by-day grid with a separate search wizard. That would make date search prominent, but remove at-a-glance browsing and introduce a new mode. The implemented refinement keeps the existing calendar and adds date-matched room choices beside the booking fields.
+
+**Demo:** To show the main action, enter `2026-11-09` as both days, choose an available room such as `A2-106`, and confirm. To show an unsuccessful action, choose `A1-203` for `2026-11-09` and check availability; the specific overlap is announced. Use **Reset demo** to restore the examples.
+
+### Before and after
+
+**Before**
+
+![Before: room availability shown only as individual calendar dates](./screenshots/before.png)
+
+**After**
+
+![After: booking form shows inclusive dates and rooms available for the selected range](./screenshots/after.png)
 
 ## User scenario for this session
 
