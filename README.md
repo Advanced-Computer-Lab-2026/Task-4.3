@@ -13,13 +13,13 @@ The terminal prints **one local URL**. Open that link in your normal external br
 
 ## Functional brief
 
-Users can browse bookings across an example directory of 18 rooms, create a booking, and change their own booking. Date ranges must be valid and overlapping bookings for the same room are rejected.
+Users can browse bookings across an example directory of 18 rooms, create a booking, and change or delete their own bookings. Click an open date to open the booking form, or click one of your reserved dates to edit or delete it. Date ranges must be valid and overlapping bookings for the same room are rejected.
 
 ### Fields from the prior lab
 
 - `roomNumber` — Room number: required text
 - `startDate` — Start date: YYYY-MM-DD
-- `endDate` — End date: YYYY-MM-DD, strictly after start
+- `endDate` — End date: YYYY-MM-DD, inclusive (same day as start or later)
 - `purpose` — Purpose: optional
 
 The demo supports create/edit and stores your updates in browser `localStorage` for this browser. **Reset demo** restores the example records. You can assume the current signed-in user is `You`.
