@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-The terminal prints **one local URL**. Open that link in your normal external browser. The development server will **not** open a browser automatically. Press `Ctrl+C` to stop it.
+The terminal prints **one local URL**. Open that link in your normal external browser. The development server will **not** open a browser automatically.
 
 ## Functional brief
 
